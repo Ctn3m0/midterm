@@ -36,7 +36,6 @@ public class Book implements Parcelable {
         return author;
     }
 
-    // Get book cover from covers API
     public String getCoverUrl() {
         return "http://covers.openlibrary.org/b/olid/" + openLibraryId + "-L.jpg?default=false";
     }
@@ -60,11 +59,9 @@ public class Book implements Parcelable {
             e.printStackTrace();
             return null;
         }
-        // Return new object
         return book;
     }
 
-    // Return comma separated author list when there is more than one author
     private static String getAuthor(final JSONObject jsonObject) {
         try {
             final JSONArray authors = jsonObject.getJSONArray("author_name");
@@ -91,11 +88,8 @@ public class Book implements Parcelable {
         }
     }
 
-    // Decodes array of book json results into business model objects
     public static ArrayList<Book> fromJson(JSONArray jsonArray) {
         ArrayList<Book> books = new ArrayList<Book>(jsonArray.length());
-        // Process each result in json array, decode and convert to business
-        // object
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject bookJson = null;
             try {

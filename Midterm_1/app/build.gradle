@@ -41,10 +41,4 @@ dependencies {
     implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation 'com.codepath.libraries:asynchttpclient:2.1.1'
 
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
-    // retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 }

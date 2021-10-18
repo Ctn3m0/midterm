@@ -14,10 +14,33 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/Midterm_1/app/src/main/res/layout/layout_round.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Midterm_1/app/src/main/res/menu/menu_main.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Midterm_1/app/src/main/res/menu/menu_nav.xml" value="0.2557291666666667" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.19074074074074074" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/drawable/ic_menu.xml" value="0.15833333333333333" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/activity_toolbar.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_book.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_book1.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_book2.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_book3.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_book4.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_book5.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_classic_book.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_most_loved_book.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_romance_book.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_search.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_subjects.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/fragment_text_book.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/layout_nav.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/navigation_header.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/toolbar.xml" value="0.3542116630669546" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/menu/menu_nav.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/menu/menu_navigation_header.xml" value="0.1" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/menu/menu_test.xml" value="0.1796875" />
+        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/menu/menu_toolbar.xml" value="0.1796875" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

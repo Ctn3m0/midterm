@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/nav_search"
-        android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom"
-        android:title="search"/>
-    <item android:id="@+id/nav_menu"
-        android:icon="@drawable/ic_menu"
-        android:title="Menu"
+    <item android:id="@+id/left_arrow"
+        android:title="left"
+        android:icon="@drawable/ic_baseline_arrow_back_ios_24"
         app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/right_arrow"
+        android:title="right"
+        android:icon="@drawable/ic_baseline_arrow_forward_ios_24"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/settings"
+        android:title="Settings"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/favorites"
+        android:title="Favorites"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/share"
+        android:title="Share"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/favorite"
+        android:title="Favorite"
+        app:showAsAction="never"/>
+
 </menu>

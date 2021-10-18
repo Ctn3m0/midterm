@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/open_library"
+        android:title="Open Library">
+    </item>
+    <item
+        android:id="@+id/rate_us"
+        android:title="Rate Us">
+    </item>
+    <item
+        android:id="@+id/more_apps"
+        android:title="More Apps">
+    </item>
+    <item
+        android:id="@+id/freebies_and_hot_deals"
+        android:title="Freebies and hot deals">
+    </item>
+</menu>

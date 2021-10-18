@@ -30,12 +30,46 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 
     private int mCurrentFragment = FRAGMENT_BOOK;
 
+    private ActionBarDrawerToggle abdt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDrawerLayout = findViewById(R.id.my_drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
+
+
+        abdt = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        abdt.setDrawerIndicatorEnabled(true);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        mDrawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
+
+        NavigationView navigationView2 = findViewById(R.id.nav_view2);
+        navigationView2.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.open_library) {
+                    Toast.makeText(OpenLibrary.this, "Open Library", Toast.LENGTH_SHORT).show();
+                }
+                else if (id == R.id.rate_us) {
+                    Toast.makeText(OpenLibrary.this, "Rate Us", Toast.LENGTH_SHORT).show();
+                }
+                else if (id == R.id.more_apps) {
+                    Toast.makeText(OpenLibrary.this, "More Apps", Toast.LENGTH_SHORT).show();
+                }
+                else if (id == R.id.freebies_and_hot_deals) {
+                    Toast.makeText(OpenLibrary.this, "Freebies and hot deals", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -54,21 +88,21 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_search:
-                if (mCurrentFragment != FRAGMENT_SEARCH){
-                    replaceFragment(new SearchFragment());
-                    setTitle("Search");
-                    mCurrentFragment = FRAGMENT_SEARCH;
-                }
-                return true;
-            case R.id.nav_menu:
-                mDrawerLayout.openDrawer(GravityCompat.END);
-                item.setChecked(true);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+//        switch (item.getItemId()) {
+//            case R.id.nav_search:
+//                if (mCurrentFragment != FRAGMENT_SEARCH){
+//                    replaceFragment(new SearchFragment());
+//                    setTitle("Search");
+//                    mCurrentFragment = FRAGMENT_SEARCH;
+//                }
+//                return true;
+//            case R.id.settings:
+//                mDrawerLayout.openDrawer(GravityCompat.END);
+//                item.setChecked(true);
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+        return abdt.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -92,7 +126,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         if (mDrawerLayout.isDrawerOpen(GravityCompat.END)){
             mDrawerLayout.closeDrawer(GravityCompat.END);
         }else if (mCurrentFragment != FRAGMENT_BOOK) {
-            setTitle("Open Library");
+            setTitle(R.drawable.logo);
             replaceFragment(new BookFragment());
             mCurrentFragment = FRAGMENT_BOOK;
         }else {

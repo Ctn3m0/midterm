@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "134950038719",
+    "project_id": "openlibrary-497bb",
+    "storage_bucket": "openlibrary-497bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134950038719:android:a1a68e3256d1950e7eaa0a",
+        "android_client_info": {
+          "package_name": "vn.edu.usth.midterm_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134950038719-5n1864t0abjv11vfh8itvsahe5163j4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC12V9LaMxEPLi5HMSPkIncYbpTZr1DSGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134950038719-5n1864t0abjv11vfh8itvsahe5163j4p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package vn.edu.usth.midterm_1;
+package vn.edu.usth.booksearch;
 
 import org.junit.Test;
 

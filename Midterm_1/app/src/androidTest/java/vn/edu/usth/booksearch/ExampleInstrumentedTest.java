@@ -1,4 +1,4 @@
-package vn.edu.usth.midterm_1;
+package vn.edu.usth.booksearch;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("vn.edu.usth.midterm_1", appContext.getPackageName());
+        assertEquals("vn.edu.usth.booksearch", appContext.getPackageName());
     }
 }

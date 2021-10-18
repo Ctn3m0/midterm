@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -29,6 +31,8 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     private static final int FRAGMENT_SUBJECTS = 2;
 
     private int mCurrentFragment = FRAGMENT_BOOK;
+    private ImageView menuImage;
+    private ImageView searchImage;
 
     private ActionBarDrawerToggle abdt;
 
@@ -76,6 +80,30 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 
         replaceFragment(new BookFragment());
         setTitle("Open Library");
+
+        menuImage = (ImageView) findViewById(R.id.menu_toolbar);
+        menuImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mDrawerLayout.isDrawerOpen(GravityCompat.END)){
+                    mDrawerLayout.closeDrawer(GravityCompat.END);
+                } else {
+                    mDrawerLayout.openDrawer(GravityCompat.END);
+                }
+            }
+        });
+
+        searchImage = (ImageView) findViewById(R.id.menu_search);
+        searchImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mCurrentFragment != FRAGMENT_SEARCH){
+                    replaceFragment(new SearchFragment());
+                    setTitle("Search");
+                    mCurrentFragment = FRAGMENT_SEARCH;
+                }
+            }
+        });
     }
 
     @Override
@@ -126,7 +154,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         if (mDrawerLayout.isDrawerOpen(GravityCompat.END)){
             mDrawerLayout.closeDrawer(GravityCompat.END);
         }else if (mCurrentFragment != FRAGMENT_BOOK) {
-            setTitle(R.drawable.logo);
+            setTitle("Open Library");
             replaceFragment(new BookFragment());
             mCurrentFragment = FRAGMENT_BOOK;
         }else {

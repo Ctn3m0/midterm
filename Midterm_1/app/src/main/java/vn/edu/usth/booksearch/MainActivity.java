@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         mTextViewResult.setText("123213");
 
         search = false;
-        fetchBooks("Oscar Wilde", search);
+        fetchBooks("Harry Potter", search);
     }
 
     public void fetchBooks(String query, boolean search) {

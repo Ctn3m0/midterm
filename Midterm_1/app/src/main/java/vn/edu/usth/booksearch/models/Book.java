@@ -8,6 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import android.util.Log;
 import java.util.ArrayList;
 
 public class Book implements Parcelable {
@@ -43,9 +44,8 @@ public class Book implements Parcelable {
     // Returns a Book given the expected JSON
     public static Book fromJson(JSONObject jsonObject) {
         Book book = new Book();
+//        Log.i("JSON Object",jsonObject);
         try {
-            // Deserialize json into object fields
-            // Check if a cover edition is available
             if (jsonObject.has("cover_edition_key")) {
                 book.openLibraryId = jsonObject.getString("cover_edition_key");
             } else if(jsonObject.has("edition_key")) {
@@ -94,6 +94,7 @@ public class Book implements Parcelable {
             JSONObject bookJson = null;
             try {
                 bookJson = jsonArray.getJSONObject(i);
+                Log.i("JSON Object",bookJson.toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;

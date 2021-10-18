@@ -9,16 +9,23 @@
     tools:context=".OpenLibrary"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/my_drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:openDrawer="end">
 
-        <FrameLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/content"/>
+            android:id="@+id/nav_view2"
+            app:headerLayout="@layout/navigation_header"
+            android:layout_gravity="start"
+            app:menu="@menu/menu_navigation_header"/>
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
@@ -27,6 +34,11 @@
             android:layout_gravity="end"
             app:headerLayout="@layout/layout_nav"
             app:menu="@menu/menu_nav"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/content"/>
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </LinearLayout>

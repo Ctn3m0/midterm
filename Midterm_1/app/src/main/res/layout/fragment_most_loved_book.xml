@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Most loved books"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="vn.edu.usth.midterm_1.Book5Fragment"
+                android:id="@+id/book5.1"/>
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="vn.edu.usth.midterm_1.Book4Fragment"
+                android:id="@+id/book4.1"/>
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="vn.edu.usth.midterm_1.Book3Fragment"
+                android:id="@+id/book3.1"/>
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="vn.edu.usth.midterm_1.Book2Fragment"
+                android:id="@+id/book2.1"/>
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="vn.edu.usth.midterm_1.Book1Fragment"
+                android:id="@+id/book1.1"/>
+        </LinearLayout>
+
+    </HorizontalScrollView>
+</LinearLayout>

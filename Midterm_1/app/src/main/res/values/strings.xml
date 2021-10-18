@@ -11,4 +11,6 @@
     <string name="login">Login</string>
     <string name="registering">Not registered yet</string>
     <string name="redirectRegister">Register here</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import cz.msebera.android.httpclient.Header;
-//import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,21 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void fetchBooks(String query, boolean search) {
         this.search = search;
-//        if(search)
-//            progress.setVisibility(ProgressBar.VISIBLE);
-//        client = new BookClient();
-        /*if (query == null) {
-        } else {
-            query = "oscar Wilde";
-        }*/
-
         client = new BookClient();
 
         client.getBooks(query, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("fetch", query);
                 try {
-//                    progress.setVisibility(ProgressBar.GONE);
                     JSONArray docs = null;
                     if(response != null) {
                         docs = response.getJSONArray("docs");
@@ -76,14 +66,12 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } catch (JSONException e) {
-                    Log.v("BIG PROBLEM", query);
                     e.printStackTrace();
                     Log.e("ERROR",e.toString());
                 }
             }
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.v("BIG PROBLEM", "FAIL");
-//                progress.setVisibility(ProgressBar.GONE);
             }
         });
     }

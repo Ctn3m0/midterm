@@ -41,7 +41,6 @@ public class Book implements Parcelable {
         return "http://covers.openlibrary.org/b/olid/" + openLibraryId + "-L.jpg?default=false";
     }
 
-    // Returns a Book given the expected JSON
     public static Book fromJson(JSONObject jsonObject) {
         Book book = new Book();
 //        Log.i("JSON Object",jsonObject);

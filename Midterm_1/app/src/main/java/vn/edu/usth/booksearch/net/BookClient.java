@@ -26,7 +26,7 @@ public class BookClient {
             client.get(url + URLEncoder.encode(query, "utf-8"), handler);
         }
         catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             Log.e("MYAPP", "exception", e);
         }
     }

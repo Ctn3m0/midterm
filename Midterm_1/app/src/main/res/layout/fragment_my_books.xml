@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".BookFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".BookFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/most_loved_book"
+            android:name="vn.edu.usth.midterm_1.MostLovedBookFragment"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/classic_book_1"
+            android:name="vn.edu.usth.midterm_1.ClassicBookFragment"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/classic_book_2"
+            android:name="vn.edu.usth.midterm_1.RomanceBookFragment"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/classic_book_3"
+            android:name="vn.edu.usth.midterm_1.TextBookFragment"/>
+
+    </LinearLayout>
+</ScrollView>

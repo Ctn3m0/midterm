@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/author"
-        android:title="AUTHOR"/>
+        android:title="Author"/>
+
     <item android:id="@+id/subjects"
-        android:title="SUBJECTS"/>
+        android:title="Subjects"/>
+
+    <item android:id="@+id/settings"
+        android:title="Settings"/>
+
+    <item android:id="@+id/my_books"
+        android:title="My books"/>
+
+    <item android:id="@+id/favorites"
+        android:title="Favorites"/>
+
+    <item android:id="@+id/share"
+        android:title="Share"/>
+
+    <item android:id="@+id/rate_us"
+        android:title="Rate us"/>
+
+    <item android:id="@+id/more_apps"
+        android:title="More apps"/>
 </menu>

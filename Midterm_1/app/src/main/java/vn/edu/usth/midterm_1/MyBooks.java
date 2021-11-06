@@ -1,7 +1,12 @@
 package vn.edu.usth.midterm_1;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,18 +15,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 
-public class OpenLibrary extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MyBooks extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
 
     private static final int FRAGMENT_BOOK = 0;
@@ -37,7 +33,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_my_books);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
 
@@ -59,7 +55,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
 
         replaceFragment(new BookFragment());
-        setTitle("Open Library");
+        setTitle("My Books");
 
         menuImage = (ImageView) findViewById(R.id.menu_toolbar);
         menuImage.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +113,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.author){
-            Toast.makeText(OpenLibrary.this, "Get to author page", Toast.LENGTH_LONG).show();
+            Toast.makeText(MyBooks.this, "Get to author page", Toast.LENGTH_LONG).show();
         } else if(id == R.id.subjects){
             if (mCurrentFragment != FRAGMENT_SUBJECTS){
                 replaceFragment(new SubjectsFragment());

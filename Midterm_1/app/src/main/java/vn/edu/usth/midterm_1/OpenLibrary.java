@@ -140,8 +140,9 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                 setTitle("SUBJECTS");
             }
         }
-        else if (id==R.id.my_books) {
-            changeActivity();
+        else if (id == R.id.my_books) {
+            Intent intent = new Intent(OpenLibrary.this, MyBookActivity.class);
+            startActivity(intent);
         }
         mDrawerLayout.closeDrawer(GravityCompat.END);
         return true;
@@ -160,7 +161,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
-        private void changeActivity(){
+    private void changeActivity() {
         Intent intent = new Intent(OpenLibrary.this, SearchFragment.class);
         startActivity(intent);
     }

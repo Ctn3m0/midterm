@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.v("Testing", "Hello");
                         for (Book book : books) {
                             Log.i("Data",book.getTitle());
+                            Log.i("Image",book.getCoverUrl());
                             mTextViewResult.setText(book.toString());
                         }
                     }

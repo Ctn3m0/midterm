@@ -21,6 +21,11 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/most_loved_book"
+            android:name="vn.edu.usth.midterm_1.MostLovedBookFragment"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/classic_book_1"
             android:name="vn.edu.usth.midterm_1.ClassicBookFragment"/>
         <fragment

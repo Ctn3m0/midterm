@@ -26,9 +26,10 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
     private static final int FRAGMENT_BOOK = 0;
     private static final int FRAGMENT_SEARCH = 1;
     private static final int FRAGMENT_SUBJECTS = 2;
+    private static final int FRAGMENT_MY_BOOK = 4;
 
 
-    private int mCurrentFragment = FRAGMENT_BOOK;
+    private int mCurrentFragment = FRAGMENT_MY_BOOK;
     private ImageView menuImage;
     private ImageView searchImage;
     private ImageView logoImage;

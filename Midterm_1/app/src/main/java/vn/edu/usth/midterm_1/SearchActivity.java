@@ -15,6 +15,7 @@ import vn.edu.usth.midterm_1.models.Book;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -24,6 +25,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -77,6 +79,8 @@ public class SearchActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> mTitle = new ArrayList<String>();
     ArrayList<String> mAuthor = new ArrayList<String>();
+    ArrayList<String> mPublisher = new ArrayList<String>();
+    ArrayList<String> mUrls = new ArrayList<String>();
     ArrayList<BitmapDrawable> images = new ArrayList<BitmapDrawable>();
 
 
@@ -164,13 +168,13 @@ public class SearchActivity extends AppCompatActivity {
 //                            mTitle.add("book.getTitle()");
 //                            mAuthor.add("book.getAuthor()");
                             mAuthor.add(book.getAuthor());
-                            Log.i("AUTHOR", book.getAuthor());
+                            mPublisher.add(book.getPublisher());
+                            mUrls.add(book.getCoverUrl());
 //                            Log.i("Data",book.getTitle());
                             books_info.add(book.getTitle()+" \n"+book.getAuthor() + " \n" + book.getPublisher());
                             books_names.add(book.getTitle());
                             books_authors.add(book.getAuthor());
 //                            books_covers.add(book.getCoverUrl());
-
 
                         }
 
@@ -190,7 +194,7 @@ public class SearchActivity extends AppCompatActivity {
                         MyAdapter adapter = new MyAdapter(SearchActivity.this, aTitle, aAuthor);//, images);
                         listView.setAdapter(adapter);
 
-
+                        Log.i("publisher", mPublisher.toString());
 
                         TextView headerTextView = new TextView(SearchActivity.this);
                         headerTextView.setTypeface(Typeface.DEFAULT_BOLD);
@@ -199,6 +203,23 @@ public class SearchActivity extends AppCompatActivity {
                         headerTextView.setPadding(10, 20, 0, 20);
 
                         listView.addHeaderView(headerTextView);
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Log.i("CLICKED", "Item " + i);
+                                TextView _author = (TextView)adapterView.findViewById(R.id.textView2);
+                                TextView _title = (TextView)adapterView.findViewById(R.id.textView1);
+
+                                Log.i("Author", String.valueOf(_author.getText()));
+                                Intent temp_item = new Intent(SearchActivity.this, ViewBookActivity.class);
+                                temp_item.putExtra("author", _author.getText());
+                                temp_item.putExtra("title", _title.getText());
+                                temp_item.putExtra("publisher", mPublisher.get(i-1));
+                                temp_item.putExtra("urlCover", mUrls.get(i-1));
+                                startActivity(temp_item);
+                            }
+                        });
 
 //                        CustomBookList customBookList = new CustomBookList(MainActivity.this, books_names, books_authors, books_covers);
                     }
@@ -239,6 +260,14 @@ public class SearchActivity extends AppCompatActivity {
             this.rTitle = title;
             this.rAuthor = author;
 //            this.rImgs = Images;
+        }
+
+        public String[] getrAuthor() {
+            return rAuthor;
+        }
+
+        public String[] getrTitle() {
+            return rTitle;
         }
 
         @NonNull

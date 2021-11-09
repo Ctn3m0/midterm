@@ -16,40 +16,8 @@
         android:textStyle="bold"
         android:textSize="18dp"/>
 
-    <HorizontalScrollView
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <fragment
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:name="vn.edu.usth.midterm_1.Book1Fragment"
-                android:id="@+id/book1"/>
-            <fragment
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:name="vn.edu.usth.midterm_1.Book2Fragment"
-                android:id="@+id/book2"/>
-            <fragment
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:name="vn.edu.usth.midterm_1.Book3Fragment"
-                android:id="@+id/book3"/>
-            <fragment
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:name="vn.edu.usth.midterm_1.Book4Fragment"
-                android:id="@+id/book4"/>
-            <fragment
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:name="vn.edu.usth.midterm_1.Book5Fragment"
-                android:layout_marginBottom="20dp"
-                android:id="@+id/book5"/>
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:layout_height="wrap_content"
+        android:id="@+id/classic"/>
 </LinearLayout>

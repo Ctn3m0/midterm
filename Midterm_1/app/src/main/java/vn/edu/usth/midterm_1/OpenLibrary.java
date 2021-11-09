@@ -1,6 +1,7 @@
 package vn.edu.usth.midterm_1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,17 +11,41 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
+import vn.edu.usth.midterm_1.models.Book;
+import vn.edu.usth.midterm_1.models.Category;
+import vn.edu.usth.midterm_1.net.BookClient;
 
 public class OpenLibrary extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
@@ -34,8 +59,16 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     private ImageView menuImage;
     private ImageView searchImage;
     private ImageView logoImage;
+    private boolean search;
+    private BookClient client;
 
     private ActionBarDrawerToggle abdt;
+
+    ArrayList<String> mTitle = new ArrayList<String>();
+    ArrayList<String> mAuthor = new ArrayList<String>();
+    ArrayList<String> mPublisher = new ArrayList<String>();
+    ArrayList<String> mUrls = new ArrayList<String>();
+    ArrayList<BitmapDrawable> images = new ArrayList<BitmapDrawable>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +130,109 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 //                }
 //            }
 //        });
+//        View v = findViewById(R.id.classic_book1);
+//        TextView t = v.findViewById(R.id.home_author1);
+//        t.setText("Test");
+        fetchBooks("Harry", search);
+    }
+
+    public void fetchBooks(String query, boolean search) {
+        Bitmap book2 = BitmapFactory.decodeResource(getResources(),R.drawable.book2);
+        this.search = search;
+        client = new BookClient();
+        ListView listView = (ListView) findViewById(R.id.classic000);
+
+        client.getBooks(query, new JsonHttpResponseHandler() {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Log.v("fetch", query);
+                try {
+                    JSONArray docs = null;
+                    if(response != null) {
+                        docs = response.getJSONArray("docs");
+                        // Parse json array into array of model objects
+                        final ArrayList<Book> books = Book.fromJson(docs);
+                        // Remove all books from the adapter
+                        Log.v("Testing", "Hello");
+
+//                        List<Book> books = new List<>();
+
+                        ArrayList<String> books_info = new ArrayList<>();
+
+                        ArrayList<String> books_names = new ArrayList<>();
+                        ArrayList<String> books_authors = new ArrayList<>();
+                        ArrayList<Integer> books_covers = new ArrayList<>();
+
+                        for (Book book : books) {
+                            mTitle.add(book.getTitle());
+                            Log.i("TITLE", book.getTitle());
+//                            mTitle.add("book.getTitle()");
+//                            mAuthor.add("book.getAuthor()");
+                            mAuthor.add(book.getAuthor());
+                            mPublisher.add(book.getPublisher());
+                            mUrls.add(book.getCoverUrl());
+//                            Log.i("Data",book.getTitle());
+                            books_info.add(book.getTitle()+" \n"+book.getAuthor() + " \n" + book.getPublisher());
+                            books_names.add(book.getTitle());
+                            books_authors.add(book.getAuthor());
+//                            books_covers.add(book.getCoverUrl());
+                            images.add(new BitmapDrawable(book2));
+
+                        }
+
+                        Log.i("Data",mTitle.toString());
+                        Log.i("Data",mAuthor.toString());
+                        Log.i("Data",images.toString());
+
+                        String[] aTitle = new String[mTitle.size()];
+                        String[] aAuthor = new String[mAuthor.size()];
+                        BitmapDrawable[] aImage = new BitmapDrawable[images.size()];
+
+                        aTitle = mTitle.toArray(aTitle);
+                        aAuthor = mAuthor.toArray(aAuthor);
+                        aImage = images.toArray(aImage);
+                        Log.i("Image", aImage.toString());
+
+                        MyAdapter adapter = new MyAdapter(OpenLibrary.this, aTitle, aAuthor, aImage);//, images);
+                        listView.setAdapter(adapter);
+
+                        Log.i("publisher", mPublisher.toString());
+
+                        TextView headerTextView = new TextView(OpenLibrary.this);
+                        headerTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                        headerTextView.setText("List of Books");
+                        headerTextView.setTextSize(18);
+                        headerTextView.setPadding(10, 20, 0, 20);
+
+                        listView.addHeaderView(headerTextView);
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Log.i("CLICKED", "Item " + i);
+                                TextView _author = (TextView)adapterView.findViewById(R.id.textView2);
+                                TextView _title = (TextView)adapterView.findViewById(R.id.textView1);
+
+                                Log.i("Author", String.valueOf(_author.getText()));
+                                Intent temp_item = new Intent(OpenLibrary.this, ViewBookActivity.class);
+                                temp_item.putExtra("author", _author.getText());
+                                temp_item.putExtra("title", _title.getText());
+                                temp_item.putExtra("publisher", mPublisher.get(i-1));
+                                temp_item.putExtra("urlCover", mUrls.get(i-1));
+                                startActivity(temp_item);
+                            }
+                        });
+
+//                        CustomBookList customBookList = new CustomBookList(MainActivity.this, books_names, books_authors, books_covers);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("ERROR",e.toString());
+                }
+            }
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.v("BIG PROBLEM", "FAIL");
+            }
+        });
     }
 
     @Override
@@ -191,5 +327,40 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content, fragment);
         transaction.commit();
+    }
+    class MyAdapter extends ArrayAdapter<String> {
+
+        Context context;
+        String rTitle[];
+        String rAuthor[];
+        BitmapDrawable rImgs[];
+
+        MyAdapter (Context c, String title[], String author[], BitmapDrawable Images[]){// ArrayList<BitmapDrawable> imgs) {
+            super(c, R.layout.row, R.id.textView1, title);
+            this.context = c;
+            this.rTitle = title;
+            this.rAuthor = author;
+            this.rImgs = Images;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row = layoutInflater.inflate(R.layout.row_home, parent, false);
+            ImageView images = row.findViewById(R.id.image);
+            TextView myTitle = row.findViewById(R.id.textView1);
+            TextView myAuthor = row.findViewById(R.id.textView2);
+
+            // now set our resources on views
+            images.setImageDrawable(rImgs[position]);
+//            images.setTag("ImageSearch"+position);
+//            images.setId(position);
+            myTitle.setText(rTitle[position]);
+            myAuthor.setText(rAuthor[position]);
+
+            return row;
+        }
+
     }
 }

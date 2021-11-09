@@ -211,8 +211,8 @@ public class SearchActivity extends AppCompatActivity {
 
                                 Log.i("Author", String.valueOf(_author.getText()));
                                 Intent temp_item = new Intent(SearchActivity.this, ViewBookActivity.class);
-                                temp_item.putExtra("author", _author.getText());
-                                temp_item.putExtra("title", _title.getText());
+                                temp_item.putExtra("author", mAuthor.get(i-1));
+                                temp_item.putExtra("title", mTitle.get(i-1));
                                 temp_item.putExtra("publisher", mPublisher.get(i-1));
                                 temp_item.putExtra("urlCover", mUrls.get(i-1));
                                 startActivity(temp_item);

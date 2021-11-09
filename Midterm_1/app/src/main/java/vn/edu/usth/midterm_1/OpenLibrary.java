@@ -112,11 +112,13 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_search:
-                if (mCurrentFragment != FRAGMENT_SEARCH) {
-                    replaceFragment(new SearchFragment());
-                    setTitle("Search");
-                    mCurrentFragment = FRAGMENT_SEARCH;
-                }
+//                if (mCurrentFragment != FRAGMENT_SEARCH) {
+//                    replaceFragment(new SearchFragment());
+//                    setTitle("Search");
+//                    mCurrentFragment = FRAGMENT_SEARCH;
+//                }
+                Intent intent = new Intent(OpenLibrary.this, SearchActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.nav_menu:
                 mDrawerLayout.openDrawer(GravityCompat.END);

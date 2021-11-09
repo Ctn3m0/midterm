@@ -139,10 +139,10 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.END)){
             mDrawerLayout.closeDrawer(GravityCompat.END);
-        }else if (mCurrentFragment != FRAGMENT_BOOK) {
+        }else if (mCurrentFragment != FRAGMENT_MY_BOOK) {
             setTitle("Open Library");
-            replaceFragment(new BookFragment());
-            mCurrentFragment = FRAGMENT_BOOK;
+            replaceFragment(new MyBookFragment());
+            mCurrentFragment = FRAGMENT_MY_BOOK;
         }else {
             super.onBackPressed();
         }

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Midterm_1">
         <activity
+            android:name=".SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".MyBookActivity"
             android:exported="true" />
         <activity android:name=".OpenLibrary" />

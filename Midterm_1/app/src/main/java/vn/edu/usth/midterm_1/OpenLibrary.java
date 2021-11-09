@@ -139,7 +139,8 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         Bitmap book2 = BitmapFactory.decodeResource(getResources(),R.drawable.book2);
         this.search = search;
         client = new BookClient();
-        ListView listView = (ListView) findViewById(R.id.classic000);
+        ListView listView = (ListView) findViewById(R.id.popular);
+        ListView classicListView = (ListView) findViewById(R.id.popular);
 
         client.getBooks(query, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -161,18 +162,15 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                         ArrayList<String> books_authors = new ArrayList<>();
                         ArrayList<Integer> books_covers = new ArrayList<>();
 
-                        for (Book book : books) {
-                            mTitle.add(book.getTitle());
-                            Log.i("TITLE", book.getTitle());
-//                            mTitle.add("book.getTitle()");
-//                            mAuthor.add("book.getAuthor()");
-                            mAuthor.add(book.getAuthor());
-                            mPublisher.add(book.getPublisher());
-                            mUrls.add(book.getCoverUrl());
+                        for (int i = 0; i < 5; i++) {
+                            mTitle.add(books.get(i).getTitle());
+                            Log.i("TITLE", books.get(i).getTitle());
+//                            mTitle.add("books.get(i).getTitle()");
+//                            mAuthor.add("books.get(i).getAuthor()");
+                            mAuthor.add(books.get(i).getAuthor());
+                            mPublisher.add(books.get(i).getPublisher());
+                            mUrls.add(books.get(i).getCoverUrl());
 //                            Log.i("Data",book.getTitle());
-                            books_info.add(book.getTitle()+" \n"+book.getAuthor() + " \n" + book.getPublisher());
-                            books_names.add(book.getTitle());
-                            books_authors.add(book.getAuthor());
 //                            books_covers.add(book.getCoverUrl());
                             images.add(new BitmapDrawable(book2));
 
@@ -198,9 +196,9 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 
                         TextView headerTextView = new TextView(OpenLibrary.this);
                         headerTextView.setTypeface(Typeface.DEFAULT_BOLD);
-                        headerTextView.setText("List of Books");
-                        headerTextView.setTextSize(18);
-                        headerTextView.setPadding(10, 20, 0, 20);
+                        headerTextView.setText("Most loved books");
+                        headerTextView.setTextSize(24);
+                        headerTextView.setPadding(20, 30, 0, 30);
 
                         listView.addHeaderView(headerTextView);
 
@@ -213,8 +211,8 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 
                                 Log.i("Author", String.valueOf(_author.getText()));
                                 Intent temp_item = new Intent(OpenLibrary.this, ViewBookActivity.class);
-                                temp_item.putExtra("author", _author.getText());
-                                temp_item.putExtra("title", _title.getText());
+                                temp_item.putExtra("author", mAuthor.get(i-1));
+                                temp_item.putExtra("title", mTitle.get(i-1));
                                 temp_item.putExtra("publisher", mPublisher.get(i-1));
                                 temp_item.putExtra("urlCover", mUrls.get(i-1));
                                 startActivity(temp_item);

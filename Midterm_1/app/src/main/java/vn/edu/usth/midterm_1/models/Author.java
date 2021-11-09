@@ -11,8 +11,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Category implements Parcelable {
-    private String CoverKey;
+public class Author implements Parcelable {
     private String title;
     private String author;
 
@@ -24,19 +23,10 @@ public class Category implements Parcelable {
         return author;
     }
 
-    public String getCoverUrl() {
-        return "https://covers.openlibrary.org/b/olid/" + CoverKey + "-L.jpg?default=false";
-    }
 
-    public static Category fromJson(JSONObject jsonObject) {
-        Category _cate = new Category();
+    public static Author fromJson(JSONObject jsonObject) {
+        Author _cate = new Author();
         try {
-            if (jsonObject.has("cover_edition_key")) {
-                _cate.CoverKey = jsonObject.getString("cover_edition_key");
-            } else if(jsonObject.has("edition_key")) {
-                final JSONArray ids = jsonObject.getJSONArray("edition_key");
-                _cate.CoverKey = ids.getString(0);
-            }
             _cate.title = jsonObject.has("title") ? jsonObject.getString("title") : "";
             _cate.author = getAuthor(jsonObject);
 
@@ -64,8 +54,8 @@ public class Category implements Parcelable {
         }
     }
 
-    public static ArrayList<Category> fromJson(JSONArray jsonArray) {
-        ArrayList<Category> categorys = new ArrayList<Category>(jsonArray.length());
+    public static ArrayList<Author> fromJson(JSONArray jsonArray) {
+        ArrayList<Author> categorys = new ArrayList<Author>(jsonArray.length());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject categoryJson = null;
             try {
@@ -75,7 +65,7 @@ public class Category implements Parcelable {
                 e.printStackTrace();
                 continue;
             }
-            Category book = Category.fromJson(categoryJson);
+            Author book = Author.fromJson(categoryJson);
             if (book != null) {
                 categorys.add(book);
             }
@@ -83,7 +73,7 @@ public class Category implements Parcelable {
         return categorys;
     }
 
-    public Category() {
+    public Author() {
     }
 
     @Override
@@ -97,18 +87,18 @@ public class Category implements Parcelable {
         dest.writeString(this.title);
     }
 
-    private Category(Parcel in) {
+    private Author(Parcel in) {
         this.author = in.readString();
         this.title = in.readString();
     }
 
-    public static final Creator<Category> CREATOR = new Creator<Category>() {
-        public Category createFromParcel(Parcel source) {
-            return new Category(source);
+    public static final Creator<Author> CREATOR = new Creator<Author>() {
+        public Author createFromParcel(Parcel source) {
+            return new Author(source);
         }
 
-        public Category[] newArray(int size) {
-            return new Category[size];
+        public Author[] newArray(int size) {
+            return new Author[size];
         }
     };
 }

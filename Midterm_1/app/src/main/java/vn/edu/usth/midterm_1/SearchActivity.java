@@ -128,6 +128,8 @@ public class SearchActivity extends AppCompatActivity {
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ListView listView = (ListView) findViewById(R.id.search_items);
+                listView.setAdapter(null);
                 fetchBooks(input.getText().toString(), search);
                 Toast.makeText(SearchActivity.this, input.getText().toString(), Toast.LENGTH_LONG).show();
             }

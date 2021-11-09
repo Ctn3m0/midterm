@@ -127,7 +127,7 @@ public class ViewBookActivity extends AppCompatActivity implements NavigationVie
 
         tAuthor.setText(author);
         tTitle.setText(title);
-        tPublisher.setText(publisher);
+        tPublisher.setText("Publishers: " + publisher);
 //        iImage.setImageDrawable(LoadImageFromWebOperations(url));
 
         String finalUrl = url;
@@ -246,10 +246,10 @@ public class ViewBookActivity extends AppCompatActivity implements NavigationVie
             Intent intent = new Intent(ViewBookActivity.this, MyBookActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.favorites) {
-            Intent intent = new Intent(ViewBookActivity.this, FavoriteActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.favorites) {
+//            Intent intent = new Intent(ViewBookActivity.this, FavoriteActivity.class);
+//            startActivity(intent);
+//        }
         else if (id == R.id.my_account) {
             Intent intent = new Intent(ViewBookActivity.this, MyAccountActivity.class);
             startActivity(intent);

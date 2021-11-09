@@ -50,6 +50,24 @@
                     android:textStyle="italic"
                     android:id="@+id/book_author"
                     android:gravity="center"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add to favourite"
+                        android:id="@+id/favourite_add"
+                        android:layout_marginRight="20dp"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Read later"
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/read_later" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,6 +77,8 @@
                     android:lineHeight="30dp"
                     android:id="@+id/book_publisher"
                     android:gravity="start"/>
+
+
             </LinearLayout>
         </ScrollView>
 

@@ -7,9 +7,6 @@
     <item android:id="@+id/my_books"
         android:title="My books"/>
 
-    <item android:id="@+id/favorites"
-        android:title="Favorites"/>
-
     <item android:id="@+id/my_account"
         android:title="My Account"/>
 

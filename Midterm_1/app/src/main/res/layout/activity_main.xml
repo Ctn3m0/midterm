@@ -9,9 +9,12 @@
     tools:context=".OpenLibrary"
     android:orientation="vertical">
 
+
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
+
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/my_drawer_layout"
@@ -19,35 +22,39 @@
         android:layout_height="match_parent"
         tools:openDrawer="end">
 
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:id="@+id/nav_view2"-->
-<!--            app:headerLayout="@layout/navigation_header"-->
-<!--            android:layout_gravity="start"-->
-<!--            app:menu="@menu/menu_navigation_header"/>-->
-
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/content"/>
-<!--            <ImageView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/home"/>-->
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="There is no friend as loyal as a book - Ernest Hemingway"-->
-<!--                android:textSize="18sp"-->
-<!--                android:textStyle="italic"-->
-<!--                android:layout_gravity="center"/>-->
 
-        <ListView
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/popular"/>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/popular"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/classicz"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+
+
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"

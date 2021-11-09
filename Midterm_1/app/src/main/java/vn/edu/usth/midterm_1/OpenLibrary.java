@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 import vn.edu.usth.midterm_1.models.Book;
@@ -140,7 +142,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         this.search = search;
         client = new BookClient();
         ListView listView = (ListView) findViewById(R.id.popular);
-        ListView classicListView = (ListView) findViewById(R.id.popular);
+        ListView classicListView = (ListView) findViewById(R.id.classicz);
 
         client.getBooks(query, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -162,14 +164,14 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                         ArrayList<String> books_authors = new ArrayList<>();
                         ArrayList<Integer> books_covers = new ArrayList<>();
 
-                        for (int i = 0; i < 5; i++) {
-                            mTitle.add(books.get(i).getTitle());
-                            Log.i("TITLE", books.get(i).getTitle());
+                        for (Book book : books) {
+                            mTitle.add(book.getTitle());
+                            Log.i("TITLE", book.getTitle());
 //                            mTitle.add("books.get(i).getTitle()");
 //                            mAuthor.add("books.get(i).getAuthor()");
-                            mAuthor.add(books.get(i).getAuthor());
-                            mPublisher.add(books.get(i).getPublisher());
-                            mUrls.add(books.get(i).getCoverUrl());
+                            mAuthor.add(book.getAuthor());
+                            mPublisher.add(book.getPublisher());
+                            mUrls.add(book.getCoverUrl());
 //                            Log.i("Data",book.getTitle());
 //                            books_covers.add(book.getCoverUrl());
                             images.add(new BitmapDrawable(book2));
@@ -190,8 +192,13 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                         Log.i("Image", aImage.toString());
                         Log.i("Test Publisher", mPublisher.toString());
 
-                        MyAdapter adapter = new MyAdapter(OpenLibrary.this, aTitle, aAuthor, aImage);//, images);
+                        MyAdapter adapter = new MyAdapter(OpenLibrary.this,
+                                Arrays.copyOfRange(aTitle, 0, 8),
+                                Arrays.copyOfRange(aAuthor, 0, 8),
+                                Arrays.copyOfRange(aImage, 0, 8));//, images);
                         listView.setAdapter(adapter);
+
+                        setDynamicHeight(listView);
 
                         Log.i("publisher", mPublisher.toString());
 
@@ -218,6 +225,37 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                             }
                         });
 
+                        MyAdapter adapter1 = new MyAdapter(OpenLibrary.this,
+                                Arrays.copyOfRange(aTitle,8,17),
+                                Arrays.copyOfRange(aAuthor,8,17),
+                                Arrays.copyOfRange(aImage,8,17));
+                        classicListView.setAdapter(adapter1);
+
+                        setDynamicHeight(classicListView);
+
+                        TextView headerTextViewClassic = new TextView(OpenLibrary.this);
+                        headerTextViewClassic.setTypeface(Typeface.DEFAULT_BOLD);
+                        headerTextViewClassic.setText("Classic books");
+                        headerTextViewClassic.setTextSize(24);
+                        headerTextViewClassic.setPadding(20, 30, 0, 30);
+
+                        classicListView.addHeaderView(headerTextViewClassic);
+
+                        classicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Log.i("CLICKED", "Item " + i);
+
+                                Intent temp_item = new Intent(OpenLibrary.this, ViewBookActivity.class);
+                                temp_item.putExtra("author", mAuthor.get(i-1+8));
+                                temp_item.putExtra("title", mTitle.get(i-1+8));
+                                temp_item.putExtra("publisher", mPublisher.get(i-1+8));
+                                Log.i("Publisher", mPublisher.get(i-1+8));
+                                temp_item.putExtra("urlCover", mUrls.get(i-1+8));
+                                startActivity(temp_item);
+                            }
+                        });
+
 //                        CustomBookList customBookList = new CustomBookList(MainActivity.this, books_names, books_authors, books_covers);
                     }
                 } catch (JSONException e) {
@@ -229,6 +267,8 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                 Log.v("BIG PROBLEM", "FAIL");
             }
         });
+
+
     }
 
     @Override
@@ -279,10 +319,10 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
             Intent intent = new Intent(OpenLibrary.this, MyBookActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.favorites) {
-            Intent intent = new Intent(OpenLibrary.this, FavoriteActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.favorites) {
+//            Intent intent = new Intent(OpenLibrary.this, FavoriteActivity.class);
+//            startActivity(intent);
+//        }
         else if (id == R.id.my_account) {
             Intent intent = new Intent(OpenLibrary.this, MyAccountActivity.class);
             startActivity(intent);
@@ -351,5 +391,25 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
             return row;
         }
 
+
+    }
+
+    public static void setDynamicHeight(ListView listView) {
+        ListAdapter adapter = listView.getAdapter();
+        //check adapter if null
+        if (adapter == null) {
+            return;
+        }
+        int height = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            height += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams layoutParams = listView.getLayoutParams();
+        layoutParams.height = height + (listView.getDividerHeight() * (adapter.getCount() - 1));
+        listView.setLayoutParams(layoutParams);
+        listView.requestLayout();
     }
 }

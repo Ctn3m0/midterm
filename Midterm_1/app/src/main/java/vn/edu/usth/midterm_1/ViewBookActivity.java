@@ -117,6 +117,7 @@ public class ViewBookActivity extends AppCompatActivity implements NavigationVie
             Log.i("title", title);
             url = extras.getString("urlCover");
             Log.i("urlCover", url);
+            publisher = extras.getString("publisher");
         }
 
         tAuthor = findViewById(R.id.book_author);
@@ -126,7 +127,7 @@ public class ViewBookActivity extends AppCompatActivity implements NavigationVie
 
         tAuthor.setText(author);
         tTitle.setText(title);
-        tPublisher.setText("");
+        tPublisher.setText(publisher);
 //        iImage.setImageDrawable(LoadImageFromWebOperations(url));
 
         String finalUrl = url;

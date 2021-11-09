@@ -188,6 +188,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                         aAuthor = mAuthor.toArray(aAuthor);
                         aImage = images.toArray(aImage);
                         Log.i("Image", aImage.toString());
+                        Log.i("Test Publisher", mPublisher.toString());
 
                         MyAdapter adapter = new MyAdapter(OpenLibrary.this, aTitle, aAuthor, aImage);//, images);
                         listView.setAdapter(adapter);
@@ -206,14 +207,12 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 Log.i("CLICKED", "Item " + i);
-                                TextView _author = (TextView)adapterView.findViewById(R.id.textView2);
-                                TextView _title = (TextView)adapterView.findViewById(R.id.textView1);
 
-                                Log.i("Author", String.valueOf(_author.getText()));
                                 Intent temp_item = new Intent(OpenLibrary.this, ViewBookActivity.class);
                                 temp_item.putExtra("author", mAuthor.get(i-1));
                                 temp_item.putExtra("title", mTitle.get(i-1));
                                 temp_item.putExtra("publisher", mPublisher.get(i-1));
+                                Log.i("Publisher", mPublisher.get(i-1));
                                 temp_item.putExtra("urlCover", mUrls.get(i-1));
                                 startActivity(temp_item);
                             }

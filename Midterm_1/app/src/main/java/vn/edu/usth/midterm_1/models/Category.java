@@ -25,7 +25,7 @@ public class Category implements Parcelable {
     }
 
     public String getCoverUrl() {
-        return "http://covers.openlibrary.org/b/olid/" + CoverKey + "-L.jpg?default=false";
+        return "https://covers.openlibrary.org/b/olid/" + CoverKey + "-L.jpg?default=false";
     }
 
     public static Category fromJson(JSONObject jsonObject) {

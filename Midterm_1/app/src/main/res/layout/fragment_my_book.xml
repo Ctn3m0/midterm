@@ -43,4 +43,4 @@
             android:name="vn.edu.usth.midterm_1.TextBookFragment"/>
 
     </LinearLayout>
-</ScrollView><?xml version="1.0" encoding="utf-8"?>
+</ScrollView>

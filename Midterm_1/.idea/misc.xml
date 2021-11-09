@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Mobile midterm/midterm/Midterm_1/app/src/main/res/layout/activity_main.xml" value="0.26614583333333336" />
         <entry key="..\:/Mobile midterm/midterm/Midterm_1/app/src/main/res/layout/activity_my_book.xml" value="0.20885416666666667" />
+        <entry key="..\:/Mobile midterm/midterm/Midterm_1/app/src/main/res/layout/activity_search.xml" value="0.26614583333333336" />
+        <entry key="..\:/Mobile midterm/midterm/Midterm_1/app/src/main/res/layout/activity_view_book.xml" value="0.25" />
         <entry key="..\:/Mobile midterm/midterm/Midterm_1/app/src/main/res/layout/fragment_book.xml" value="0.20885416666666667" />
         <entry key="..\:/Mobile midterm/midterm/Midterm_1/app/src/main/res/layout/fragment_my_book.xml" value="0.20885416666666667" />
         <entry key="..\:/Mobile midterm/midterm/Midterm_1/app/src/main/res/layout/fragment_my_books.xml" value="0.20885416666666667" />
@@ -22,7 +25,6 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/Midterm_1/app/src/main/res/menu/menu_nav.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/drawable/ic_menu.xml" value="0.1" />
         <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/activity_author.xml" value="0.1796875" />
-        <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/activity_category_book.xml" value="0.1" />
         <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/bellk/OneDrive/Desktop/Git/midterm/Midterm_1/app/src/main/res/layout/activity_my_book.xml" value="0.140625" />

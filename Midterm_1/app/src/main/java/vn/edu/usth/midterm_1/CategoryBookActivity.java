@@ -50,7 +50,7 @@ import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
-public class SubjectActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CategoryBookActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     BufferedReader reader;
@@ -69,17 +69,18 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
     private ImageView searchImage;
     private ImageView logoImage;
     private boolean search;
+    private String passed_cate;
 
     ArrayList<String> mTitle = new ArrayList<String>();
+    ArrayList<String> mAuthor = new ArrayList<String>();
     ArrayList<BitmapDrawable> images = new ArrayList<BitmapDrawable>();
 
     private ActionBarDrawerToggle abdt;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subject);
+        setContentView(R.layout.activity_category_book);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
 
@@ -105,77 +106,31 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
         logoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SubjectActivity.this, OpenLibrary.class);
+                Intent intent = new Intent(CategoryBookActivity.this, OpenLibrary.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
 
-        List<String> _available_cate = new ArrayList<String>();
-
-        try{
-            reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open("subjects")));
-            String line = reader.readLine();
-            while(line != null){
-                _available_cate.add(line);
-                line = reader.readLine();
-            }
-        } catch(IOException ioe){
-            ioe.printStackTrace();
-        }
-
-        ArrayList<String> _nice_cate = new ArrayList<String>();
-
-        for (String cate : _available_cate) {
-            String new_cate = cate.replace("subjects/", "").replace("_", " ").replace("place%3A", "").replace("  ", " ");
-            String capitalized_cate = new_cate.substring(0, 1).toUpperCase() + new_cate.substring(1);
-            _nice_cate.add(capitalized_cate);
-        }
-
-        String[] categoryList = new String[_nice_cate.size()];
-        categoryList = _nice_cate.toArray(categoryList);
-
-
         search = false;
-        Log.v("AVAILABLE_CATE", _available_cate.toString());
-        Log.v("AVAILABLE_CATE_SIZE", String.valueOf(_available_cate.size()));
 
-        for (int i = 0; i < _available_cate.size(); i++) {
-            Log.v("READ FROM FILE ",_available_cate.get(i));
-//            fetchCategory(_available_cate.get(i) , search);
-
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            passed_cate = extras.getString("temp");
         }
+        fetchCategory("subjects/biography", search);
+//        Log.i("Pass", passed_cate);
 
-        client = new BookClient();
-        ListView listView = (ListView) findViewById(R.id.category_items);
-
-        ArrayAdapter adapter = new ArrayAdapter(SubjectActivity.this, android.R.layout.simple_list_item_1, categoryList);//, images);
-        listView.setAdapter(adapter);
-
-        TextView headerTextView = new TextView(SubjectActivity.this);
-        headerTextView.setTypeface(Typeface.DEFAULT_BOLD);
-        headerTextView.setText("List of Categories");
-        headerTextView.setTextSize(18);
-        headerTextView.setPadding(10, 20, 0, 20);
-
-        listView.addHeaderView(headerTextView);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i("CLICKED", "Item " + i);
-                Intent temp_item_index = new Intent(SubjectActivity.this, CategoryBookActivity.class);
-                temp_item_index.putExtra("temp", _available_cate.get(i-1));
-                startActivity(temp_item_index);
-            }
-        });
     }
 
     public void fetchCategory(String query, boolean search) {
         this.search = search;
-//        client = new BookClient();
-//        ListView listView = (ListView) findViewById(R.id.category_items);
+        client = new BookClient();
+        ListView listView2 = (ListView) findViewById(R.id.category_book_items);
+
+        if(listView2 == null){
+            Log.i("LISTVIEW", "is null");
+        }
 
         client.getCategory(query, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -188,31 +143,44 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
                         final ArrayList<Category> _Cate = Category.fromJson(works);
                         // Remove all books from the adapter
                         Log.v("Testing", "Work");
+
                         for (Category cate : _Cate) {
                             mTitle.add(cate.getTitle());
-                            Log.i("Category",cate.getCoverUrl());
+                            Log.i("TITLE", cate.getTitle());
+                            mAuthor.add(cate.getAuthor());
+                            Log.i("AUTHOR", cate.getAuthor());
                         }
 
-                        Log.i("Data",mTitle.toString());
                         String[] aTitle = new String[mTitle.size()];
+                        String[] aAuthor = new String[mAuthor.size()];
                         BitmapDrawable[] aImage = new BitmapDrawable[images.size()];
 
                         aTitle = mTitle.toArray(aTitle);
-                        for (String title : aTitle) {
-                            Log.i("TITLE", "bro lmao");
-                        }
-
+                        aAuthor = mAuthor.toArray(aAuthor);
                         aImage = images.toArray(aImage);
-                        Log.i("Image", aImage.toString());
 
-//                        SubjectActivity.MyAdapter adapter = new SubjectActivity.MyAdapter(SubjectActivity.this, aTitle);//, images);
-//                        listView.setAdapter(adapter);
+                        if(listView2 == null){
+                            Log.i("Listview", "is null");
+                        }
+                        MyAdapter adapter = new MyAdapter(CategoryBookActivity.this, aTitle, aAuthor);//, images);
+                        listView2.setAdapter(adapter);
 
-//                        TextView headerTextView = new TextView(SubjectActivity.this);
-//                        headerTextView.setTypeface(Typeface.DEFAULT_BOLD);
-//                        headerTextView.setText("List of Categories");
+                        TextView headerTextView = new TextView(CategoryBookActivity.this);
+                        headerTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                        headerTextView.setText("List of Books");
+                        headerTextView.setTextSize(18);
+                        headerTextView.setPadding(10, 20, 0, 20);
 
-//                        listView.addHeaderView(headerTextView);
+                        listView2.addHeaderView(headerTextView);
+//
+//                        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                                Log.i("CLICKED", "Item " + i);
+//                            }
+//                        });
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -225,6 +193,45 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
         });
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.author){
+            Intent intent = new Intent(CategoryBookActivity.this, AuthorActivity.class);
+            startActivity(intent);
+        }
+//        else if(id == R.id.subjects){
+//            if (mCurrentFragment != FRAGMENT_SUBJECTS){
+//                replaceFragment(new SubjectsFragment());
+//                mCurrentFragment = FRAGMENT_SUBJECTS;
+//                setTitle("SUBJECTS");
+//            }
+//        }
+        else if (id == R.id.subjects) {
+            Intent intent = new Intent(CategoryBookActivity.this, SubjectActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.my_books) {
+            Intent intent = new Intent(CategoryBookActivity.this, MyBookActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.favorites) {
+            Intent intent = new Intent(CategoryBookActivity.this, FavoriteActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.my_account) {
+            Intent intent = new Intent(CategoryBookActivity.this, MyAccountActivity.class);
+            startActivity(intent);
+        }
+
+        else if (id == R.id.log_out) {
+            Intent intent = new Intent(CategoryBookActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        mDrawerLayout.closeDrawer(GravityCompat.END);
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -255,46 +262,6 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.author){
-            Intent intent = new Intent(SubjectActivity.this, AuthorActivity.class);
-            startActivity(intent);
-        }
-//        else if(id == R.id.subjects){
-//            if (mCurrentFragment != FRAGMENT_SUBJECTS){
-//                replaceFragment(new SubjectsFragment());
-//                mCurrentFragment = FRAGMENT_SUBJECTS;
-//                setTitle("SUBJECTS");
-//            }
-//        }
-        else if (id == R.id.subjects) {
-            Intent intent = new Intent(SubjectActivity.this, SubjectActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.my_books) {
-            Intent intent = new Intent(SubjectActivity.this, MyBookActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.favorites) {
-            Intent intent = new Intent(SubjectActivity.this, FavoriteActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.my_account) {
-            Intent intent = new Intent(SubjectActivity.this, MyAccountActivity.class);
-            startActivity(intent);
-        }
-
-        else if (id == R.id.log_out) {
-            Intent intent = new Intent(SubjectActivity.this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        }
-        mDrawerLayout.closeDrawer(GravityCompat.END);
-        return true;
-    }
-
-    @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
@@ -308,13 +275,15 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
     class MyAdapter extends ArrayAdapter<String> {
 
         Context context;
-        String[] cate;
+        String[] rTitle;
+        String[] rAuthor;
 //        BitmapDrawable rImgs[];
 
-        MyAdapter (Context c, String[] cate){// ArrayList<BitmapDrawable> imgs) {
-            super(c, R.layout.row, R.id.textView1, cate);
+        MyAdapter (Context c, String title[], String author[]){// ArrayList<BitmapDrawable> imgs) {
+            super(c, R.layout.row, R.id.textView1, title);
             this.context = c;
-            this.cate = cate;
+            this.rTitle = title;
+            this.rAuthor = author;
 //            this.rImgs = Images;
         }
 
@@ -324,15 +293,16 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
             LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View row = layoutInflater.inflate(R.layout.row, parent, false);
             ImageView images = row.findViewById(R.id.image);
-            TextView category = row.findViewById(R.id.textView1);
+            TextView myTitle = row.findViewById(R.id.textView1);
+            TextView myAuthor = row.findViewById(R.id.textView2);
 
             // now set our resources on views
 //            images.setImageDrawable(rImgs[position]);
-            category.setText(cate[position]);
+            myTitle.setText(rTitle[position]);
+            myAuthor.setText(rAuthor[position]);
 
             return row;
         }
     }
-
 
 }

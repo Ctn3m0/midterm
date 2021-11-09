@@ -191,6 +191,8 @@ public class SearchActivity extends AppCompatActivity {
                         TextView headerTextView = new TextView(SearchActivity.this);
                         headerTextView.setTypeface(Typeface.DEFAULT_BOLD);
                         headerTextView.setText("List of Books");
+                        headerTextView.setTextSize(18);
+                        headerTextView.setPadding(10, 20, 0, 20);
 
                         listView.addHeaderView(headerTextView);
 

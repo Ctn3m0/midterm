@@ -28,9 +28,6 @@
             android:name=".SubjectActivity"
             android:exported="true" />
         <activity
-            android:name=".AuthorActivity"
-            android:exported="true" />
-        <activity
             android:name=".SearchActivity"
             android:exported="true" />
         <activity

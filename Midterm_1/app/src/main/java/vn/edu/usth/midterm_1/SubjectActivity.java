@@ -238,11 +238,8 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_search:
-                if (mCurrentFragment != FRAGMENT_SEARCH) {
-                    replaceFragment(new SearchFragment());
-                    setTitle("Search");
-                    mCurrentFragment = FRAGMENT_SEARCH;
-                }
+                Intent intent = new Intent(SubjectActivity.this, SearchActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.nav_menu:
                 mDrawerLayout.openDrawer(GravityCompat.END);
@@ -257,10 +254,6 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.author){
-            Intent intent = new Intent(SubjectActivity.this, AuthorActivity.class);
-            startActivity(intent);
-        }
 //        else if(id == R.id.subjects){
 //            if (mCurrentFragment != FRAGMENT_SUBJECTS){
 //                replaceFragment(new SubjectsFragment());
@@ -268,7 +261,7 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
 //                setTitle("SUBJECTS");
 //            }
 //        }
-        else if (id == R.id.subjects) {
+        if (id == R.id.subjects) {
             Intent intent = new Intent(SubjectActivity.this, SubjectActivity.class);
             startActivity(intent);
         }

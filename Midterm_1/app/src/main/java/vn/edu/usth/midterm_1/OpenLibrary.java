@@ -268,10 +268,6 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.author){
-            Intent intent = new Intent(OpenLibrary.this, AuthorActivity.class);
-            startActivity(intent);
-        }
 //        else if(id == R.id.subjects){
 //            if (mCurrentFragment != FRAGMENT_SUBJECTS){
 //                replaceFragment(new SubjectsFragment());
@@ -279,7 +275,7 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 //                setTitle("SUBJECTS");
 //            }
 //        }
-        else if (id == R.id.subjects) {
+        if (id == R.id.subjects) {
             Intent intent = new Intent(OpenLibrary.this, SubjectActivity.class);
             startActivity(intent);
         }

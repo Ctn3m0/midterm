@@ -119,9 +119,6 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.author){
-            Toast.makeText(MyBookActivity.this, "Get to author page", Toast.LENGTH_LONG).show();
-        }
 //        else if(id == R.id.subjects){
 //            if (mCurrentFragment != FRAGMENT_SUBJECTS){
 //                replaceFragment(new SubjectsFragment());
@@ -129,7 +126,7 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
 //                setTitle("SUBJECTS");
 //            }
 //        }
-        else if (id == R.id.subjects) {
+        if (id == R.id.subjects) {
             Intent intent = new Intent(MyBookActivity.this, SubjectActivity.class);
             startActivity(intent);
         }

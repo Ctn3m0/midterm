@@ -59,7 +59,9 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 
 
-public class ViewBookActivity extends AppCompatActivity {
+public class ViewBookActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DrawerLayout mDrawerLayout;
 
     TextView tAuthor;
     TextView tTitle;
@@ -68,10 +70,38 @@ public class ViewBookActivity extends AppCompatActivity {
     URL URL;
     Bitmap bitmap;
 
+    private ImageView logoImage;
+
+    private ActionBarDrawerToggle abdt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_book);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
+
+        abdt = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        abdt.setDrawerIndicatorEnabled(true);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mDrawerLayout.addDrawerListener(abdt);
+        abdt.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        logoImage = (ImageView) findViewById(R.id.logo);
+        logoImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewBookActivity.this, OpenLibrary.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
 
@@ -134,7 +164,7 @@ public class ViewBookActivity extends AppCompatActivity {
                 }
                 // Assume that we got our data from server
                 Bundle bundle = new Bundle();
-                bundle.putString("server_response", "some sample json here");
+                bundle.putString("server_response", "Book loaded successfully!");
                 // notify main thread
                 Message msg = new Message();
                 msg.setData(bundle);
@@ -179,5 +209,64 @@ public class ViewBookActivity extends AppCompatActivity {
             Log.i("FAILLLL", e.toString());
             return null;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_toolbar, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_search:
+                Intent intent = new Intent(ViewBookActivity.this, SearchActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.nav_menu:
+                mDrawerLayout.openDrawer(GravityCompat.END);
+                item.setChecked(true);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+//        return abdt.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.subjects) {
+            Intent intent = new Intent(ViewBookActivity.this, SubjectActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.my_books) {
+            Intent intent = new Intent(ViewBookActivity.this, MyBookActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.favorites) {
+            Intent intent = new Intent(ViewBookActivity.this, FavoriteActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.my_account) {
+            Intent intent = new Intent(ViewBookActivity.this, MyAccountActivity.class);
+            startActivity(intent);
+        }
+
+        else if (id == R.id.log_out) {
+            Intent intent = new Intent(ViewBookActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        mDrawerLayout.closeDrawer(GravityCompat.END);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

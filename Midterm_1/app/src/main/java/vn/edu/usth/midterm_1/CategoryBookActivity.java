@@ -196,10 +196,6 @@ public class CategoryBookActivity extends AppCompatActivity implements Navigatio
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.author){
-            Intent intent = new Intent(CategoryBookActivity.this, AuthorActivity.class);
-            startActivity(intent);
-        }
 //        else if(id == R.id.subjects){
 //            if (mCurrentFragment != FRAGMENT_SUBJECTS){
 //                replaceFragment(new SubjectsFragment());
@@ -207,7 +203,7 @@ public class CategoryBookActivity extends AppCompatActivity implements Navigatio
 //                setTitle("SUBJECTS");
 //            }
 //        }
-        else if (id == R.id.subjects) {
+        if (id == R.id.subjects) {
             Intent intent = new Intent(CategoryBookActivity.this, SubjectActivity.class);
             startActivity(intent);
         }

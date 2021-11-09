@@ -106,17 +106,17 @@ public class SearchActivity extends AppCompatActivity {
         input = (EditText) findViewById(R.id.search_input);
         Search = (ImageButton) findViewById(R.id.search_button);
 
-        try{
-            reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open("subjects")));
-            String line = reader.readLine();
-            while(line != null){
-                _available_cate.add(line);
-                line = reader.readLine();
-            }
-        } catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+//        try{
+//            reader = new BufferedReader(
+//                    new InputStreamReader(getAssets().open("subjects")));
+//            String line = reader.readLine();
+//            while(line != null){
+//                _available_cate.add(line);
+//                line = reader.readLine();
+//            }
+//        } catch(IOException ioe){
+//            ioe.printStackTrace();
+//        }
 
 
         input = (EditText) findViewById(R.id.search_input);

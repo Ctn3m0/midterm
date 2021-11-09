@@ -80,10 +80,9 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         logoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mCurrentFragment != FRAGMENT_BOOK) {
-                    replaceFragment(new BookFragment());
-                    mCurrentFragment = FRAGMENT_BOOK;
-                }
+                Intent intent = new Intent(OpenLibrary.this, OpenLibrary.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 
@@ -134,16 +133,36 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.author){
-            Toast.makeText(OpenLibrary.this, "Get to author page", Toast.LENGTH_LONG).show();
-        } else if(id == R.id.subjects){
-            if (mCurrentFragment != FRAGMENT_SUBJECTS){
-                replaceFragment(new SubjectsFragment());
-                mCurrentFragment = FRAGMENT_SUBJECTS;
-                setTitle("SUBJECTS");
-            }
+            Intent intent = new Intent(OpenLibrary.this, AuthorActivity.class);
+            startActivity(intent);
+        }
+//        else if(id == R.id.subjects){
+//            if (mCurrentFragment != FRAGMENT_SUBJECTS){
+//                replaceFragment(new SubjectsFragment());
+//                mCurrentFragment = FRAGMENT_SUBJECTS;
+//                setTitle("SUBJECTS");
+//            }
+//        }
+        else if (id == R.id.subjects) {
+            Intent intent = new Intent(OpenLibrary.this, SubjectActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.my_books) {
             Intent intent = new Intent(OpenLibrary.this, MyBookActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.favorites) {
+            Intent intent = new Intent(OpenLibrary.this, FavoriteActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.my_account) {
+            Intent intent = new Intent(OpenLibrary.this, MyAccountActivity.class);
+            startActivity(intent);
+        }
+
+        else if (id == R.id.log_out) {
+            Intent intent = new Intent(OpenLibrary.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         mDrawerLayout.closeDrawer(GravityCompat.END);

@@ -94,7 +94,6 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        replaceFragment(new BookFragment());
         setTitle("Open Library");
 
 //        menuImage = (ImageView) findViewById(R.id.menu_toolbar);
@@ -305,11 +304,8 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.END)){
             mDrawerLayout.closeDrawer(GravityCompat.END);
-        }else if (mCurrentFragment != FRAGMENT_BOOK) {
-            setTitle("Open Library");
-            replaceFragment(new BookFragment());
-            mCurrentFragment = FRAGMENT_BOOK;
-        }else {
+        }
+        else {
             super.onBackPressed();
         }
     }

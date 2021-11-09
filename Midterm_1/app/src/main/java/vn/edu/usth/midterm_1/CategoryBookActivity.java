@@ -118,7 +118,7 @@ public class CategoryBookActivity extends AppCompatActivity implements Navigatio
         if (extras != null) {
             passed_cate = extras.getString("temp");
         }
-        fetchCategory("subjects/biography", search);
+        fetchCategory(passed_cate, search);
 //        Log.i("Pass", passed_cate);
 
     }

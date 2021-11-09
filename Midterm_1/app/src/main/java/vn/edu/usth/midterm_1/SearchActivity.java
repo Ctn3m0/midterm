@@ -158,9 +158,11 @@ public class SearchActivity extends AppCompatActivity {
 
                         for (Book book : books) {
                             mTitle.add(book.getTitle());
+                            Log.i("TITLE", book.getTitle());
 //                            mTitle.add("book.getTitle()");
 //                            mAuthor.add("book.getAuthor()");
                             mAuthor.add(book.getAuthor());
+                            Log.i("AUTHOR", book.getAuthor());
 //                            Log.i("Data",book.getTitle());
                             books_info.add(book.getTitle()+" \n"+book.getAuthor() + " \n" + book.getPublisher());
                             books_names.add(book.getTitle());

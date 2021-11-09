@@ -73,7 +73,9 @@ public class Book implements Parcelable {
         } catch (JSONException e) {
             return "";
         }
-    }    private static String getPublisher(final JSONObject jsonObject) {
+    }
+
+    private static String getPublisher(final JSONObject jsonObject) {
         try {
             final JSONArray pubs = jsonObject.getJSONArray("publisher");
             int numPubs = pubs.length();

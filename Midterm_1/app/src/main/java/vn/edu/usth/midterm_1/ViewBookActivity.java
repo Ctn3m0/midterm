@@ -98,7 +98,7 @@ public class ViewBookActivity extends AppCompatActivity {
 
         tAuthor.setText(author);
         tTitle.setText(title);
-        tPublisher.setText(publisher);
+        tPublisher.setText("Publishers: " + publisher);
 //        iImage.setImageDrawable(LoadImageFromWebOperations(url));
 
         String finalUrl = url;
@@ -123,7 +123,7 @@ public class ViewBookActivity extends AppCompatActivity {
                     connection.connect();
                     // Receive response
                     int response = connection.getResponseCode();
-                    Log.i("USTHWeather", "The response is: " + response);
+                    Log.i("CRAWL IMAGE", "The response is: " + response);
                     InputStream is = connection.getInputStream();
                     // Process image response
                     bitmap = BitmapFactory.decodeStream(is);
@@ -173,10 +173,10 @@ public class ViewBookActivity extends AppCompatActivity {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
             Drawable d = Drawable.createFromStream(is, "src name");
-            Log.i("Sucess", "get the image");
+            Log.i("SUCCESS", "get the image");
             return d;
         } catch (Exception e) {
-            Log.i("Faillllll", e.toString());
+            Log.i("FAILLLL", e.toString());
             return null;
         }
     }

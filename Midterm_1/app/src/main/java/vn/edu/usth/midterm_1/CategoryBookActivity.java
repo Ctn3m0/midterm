@@ -73,6 +73,7 @@ public class CategoryBookActivity extends AppCompatActivity implements Navigatio
 
     ArrayList<String> mTitle = new ArrayList<String>();
     ArrayList<String> mAuthor = new ArrayList<String>();
+    ArrayList<String> mUrls = new ArrayList<String>();
     ArrayList<BitmapDrawable> images = new ArrayList<BitmapDrawable>();
 
     private ActionBarDrawerToggle abdt;
@@ -149,6 +150,7 @@ public class CategoryBookActivity extends AppCompatActivity implements Navigatio
                             Log.i("TITLE", cate.getTitle());
                             mAuthor.add(cate.getAuthor());
                             Log.i("AUTHOR", cate.getAuthor());
+                            mUrls.add(cate.getCoverUrl());
                         }
 
                         String[] aTitle = new String[mTitle.size()];
@@ -172,13 +174,22 @@ public class CategoryBookActivity extends AppCompatActivity implements Navigatio
                         headerTextView.setPadding(10, 20, 0, 20);
 
                         listView2.addHeaderView(headerTextView);
-//
-//                        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                                Log.i("CLICKED", "Item " + i);
-//                            }
-//                        });
+
+                        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Log.i("CLICKED", "Item " + i);
+                                TextView _author = (TextView)adapterView.findViewById(R.id.textView2);
+                                TextView _title = (TextView)adapterView.findViewById(R.id.textView1);
+
+                                Log.i("Author", String.valueOf(_author.getText()));
+                                Intent temp_item = new Intent(CategoryBookActivity.this, ViewBookActivity.class);
+                                temp_item.putExtra("author", mAuthor.get(i-1));
+                                temp_item.putExtra("title", mTitle.get(i-1));
+                                temp_item.putExtra("urlCover", mUrls.get(i-1));
+                                startActivity(temp_item);
+                            }
+                        });
 
 
                     }

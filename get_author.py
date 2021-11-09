@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = "https://openlibrary.org/subjects"
+url = "https://openlibrary.org/authors"
 
 payload={}
 headers = {
@@ -21,10 +21,12 @@ headers = {
 
 response = requests.request("GET", url, headers=headers, data=payload)
 soup = BeautifulSoup(response.text, "html.parser")
-_subjects = soup.find("div", {"id": "subjectsPage"})
+_subjects = soup.find("ul", {"class": "authorList"})
 
-with open('subjects', 'w') as _file:
+with open('authors', 'a') as _file:
     for _ in _subjects.findAll('a'):
         _string = _['href'][1:]
-        if "subjects" in _string:
+        if "authors" in _string:
             _file.write(_string+'\n')
+            with open('authors_name', 'a', encoding='utf-8') as author_file:
+                author_file.write(_.getText()+'\n')

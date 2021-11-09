@@ -53,7 +53,10 @@ public class Category implements Parcelable {
             int numAuthors = authors.length();
             final String[] authorStrings = new String[numAuthors];
             for (int i = 0; i < numAuthors; ++i) {
-                authorStrings[i] = authors.getString(i);
+                JSONObject _authours = authors.getJSONObject(i);
+
+                Log.i("authorStrings",_authours.optString("name"));
+                authorStrings[i] = _authours.optString("name");
             }
             return TextUtils.join(", ", authorStrings);
         } catch (JSONException e) {

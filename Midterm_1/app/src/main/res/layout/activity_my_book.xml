@@ -34,10 +34,29 @@
             android:layout_height="match_parent"
             android:id="@+id/content"/>
 
-        <ListView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/favorite"/>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/favorite"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/late_read"/>
+            </LinearLayout>
+        </ScrollView>
+
+
+
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"

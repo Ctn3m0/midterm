@@ -7,12 +7,19 @@
     android:paddingLeft="30px"
     android:background="@color/nav">
 
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/avatar"
+        android:layout_gravity="center" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BROWSER"
+        android:text="tqh@gmail.com"
         android:textStyle="bold"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"

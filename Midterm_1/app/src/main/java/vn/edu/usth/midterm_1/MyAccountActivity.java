@@ -119,10 +119,10 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationVi
 //            Intent intent = new Intent(MyAccountActivity.this, FavoriteActivity.class);
 //            startActivity(intent);
 //        }
-        else if (id == R.id.my_account) {
-            Intent intent = new Intent(MyAccountActivity.this, MyAccountActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.my_account) {
+//            Intent intent = new Intent(MyAccountActivity.this, MyAccountActivity.class);
+//            startActivity(intent);
+//        }
 
         else if (id == R.id.log_out) {
             Intent intent = new Intent(MyAccountActivity.this, LoginActivity.class);

@@ -22,11 +22,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 import vn.edu.usth.midterm_1.models.Book;
@@ -118,7 +121,7 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
             }
         });
 
-        fetchBooks("Harry", search);
+        fetchBooks("Lord of The Rings", search);
     }
 
     public void fetchBooks(String query, boolean search) {
@@ -126,7 +129,7 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
         this.search = search;
         client = new BookClient();
         ListView listView = (ListView) findViewById(R.id.favorite);
-        ListView classicListView = (ListView) findViewById(R.id.favorite);
+        ListView lateReadListView = (ListView) findViewById(R.id.late_read);
 
         client.getBooks(query, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -148,14 +151,14 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
                         ArrayList<String> books_authors = new ArrayList<>();
                         ArrayList<Integer> books_covers = new ArrayList<>();
 
-                        for (int i = 1; i < 3; i++) {
-                            mTitle.add(books.get(i).getTitle());
-                            Log.i("TITLE", books.get(i).getTitle());
+                        for (Book book : books) {
+                            mTitle.add(book.getTitle());
+                            Log.i("TITLE", book.getTitle());
 //                            mTitle.add("books.get(i).getTitle()");
 //                            mAuthor.add("books.get(i).getAuthor()");
-                            mAuthor.add(books.get(i).getAuthor());
-                            mPublisher.add(books.get(i).getPublisher());
-                            mUrls.add(books.get(i).getCoverUrl());
+                            mAuthor.add(book.getAuthor());
+                            mPublisher.add(book.getPublisher());
+                            mUrls.add(book.getCoverUrl());
 //                            Log.i("Data",book.getTitle());
 //                            books_covers.add(book.getCoverUrl());
                             images.add(new BitmapDrawable(book2));
@@ -176,8 +179,13 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
                         Log.i("Image", aImage.toString());
                         Log.i("Test Publisher", mPublisher.toString());
 
-                        MyAdapter adapter = new MyAdapter(MyBookActivity.this, aTitle, aAuthor, aImage);//, images);
+                        MyAdapter adapter = new MyAdapter(MyBookActivity.this,
+                                Arrays.copyOfRange(aTitle, 0, 3),
+                                Arrays.copyOfRange(aAuthor, 0, 3),
+                                Arrays.copyOfRange(aImage, 0, 3));
                         listView.setAdapter(adapter);
+
+                        setDynamicHeight(listView);
 
                         Log.i("publisher", mPublisher.toString());
 
@@ -201,6 +209,51 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
                                 Log.i("Publisher", mPublisher.get(i-1));
                                 temp_item.putExtra("urlCover", mUrls.get(i-1));
                                 startActivity(temp_item);
+                            }
+                        });
+
+                        listView.setOnTouchListener(new View.OnTouchListener() {
+
+                            public boolean onTouch(View v, MotionEvent event) {
+                                return (event.getAction() == MotionEvent.ACTION_MOVE);
+                            }
+                        });
+
+                        MyAdapter adapter1 = new MyAdapter(MyBookActivity.this,
+                                Arrays.copyOfRange(aTitle,3,6),
+                                Arrays.copyOfRange(aAuthor,3,6),
+                                Arrays.copyOfRange(aImage,3,6));
+                        lateReadListView.setAdapter(adapter1);
+
+                        setDynamicHeight(lateReadListView);
+
+                        TextView headerTextViewClassic = new TextView(MyBookActivity.this);
+                        headerTextViewClassic.setTypeface(Typeface.DEFAULT_BOLD);
+                        headerTextViewClassic.setText("Read Later");
+                        headerTextViewClassic.setTextSize(24);
+                        headerTextViewClassic.setPadding(20, 30, 0, 30);
+
+                        lateReadListView.addHeaderView(headerTextViewClassic);
+
+                        lateReadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Log.i("CLICKED", "Item " + i);
+
+                                Intent temp_item = new Intent(MyBookActivity.this, ViewBookActivity.class);
+                                temp_item.putExtra("author", mAuthor.get(i-1+2));
+                                temp_item.putExtra("title", mTitle.get(i-1+2));
+                                temp_item.putExtra("publisher", mPublisher.get(i-1+2));
+                                Log.i("Publisher", mPublisher.get(i-1+2));
+                                temp_item.putExtra("urlCover", mUrls.get(i-1+2));
+                                startActivity(temp_item);
+                            }
+                        });
+
+                        lateReadListView.setOnTouchListener(new View.OnTouchListener() {
+
+                            public boolean onTouch(View v, MotionEvent event) {
+                                return (event.getAction() == MotionEvent.ACTION_MOVE);
                             }
                         });
 
@@ -272,10 +325,10 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
 //            Intent intent = new Intent(MyBookActivity.this, FavoriteActivity.class);
 //            startActivity(intent);
 //        }
-        else if (id == R.id.my_account) {
-            Intent intent = new Intent(MyBookActivity.this, MyAccountActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.my_account) {
+//            Intent intent = new Intent(MyBookActivity.this, MyAccountActivity.class);
+//            startActivity(intent);
+//        }
 
         else if (id == R.id.log_out) {
             Intent intent = new Intent(MyBookActivity.this, LoginActivity.class);
@@ -339,5 +392,24 @@ public class MyBookActivity extends AppCompatActivity implements NavigationView.
             return row;
         }
 
+    }
+
+    public static void setDynamicHeight(ListView listView) {
+        ListAdapter adapter = listView.getAdapter();
+        //check adapter if null
+        if (adapter == null) {
+            return;
+        }
+        int height = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            height += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams layoutParams = listView.getLayoutParams();
+        layoutParams.height = height + (listView.getDividerHeight() * (adapter.getCount() - 1));
+        listView.setLayoutParams(layoutParams);
+        listView.requestLayout();
     }
 }

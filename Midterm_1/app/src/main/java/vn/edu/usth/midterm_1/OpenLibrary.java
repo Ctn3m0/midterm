@@ -323,10 +323,10 @@ public class OpenLibrary extends AppCompatActivity implements NavigationView.OnN
 //            Intent intent = new Intent(OpenLibrary.this, FavoriteActivity.class);
 //            startActivity(intent);
 //        }
-        else if (id == R.id.my_account) {
-            Intent intent = new Intent(OpenLibrary.this, MyAccountActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.my_account) {
+//            Intent intent = new Intent(OpenLibrary.this, MyAccountActivity.class);
+//            startActivity(intent);
+//        }
 
         else if (id == R.id.log_out) {
             Intent intent = new Intent(OpenLibrary.this, LoginActivity.class);

@@ -250,10 +250,10 @@ public class ViewBookActivity extends AppCompatActivity implements NavigationVie
 //            Intent intent = new Intent(ViewBookActivity.this, FavoriteActivity.class);
 //            startActivity(intent);
 //        }
-        else if (id == R.id.my_account) {
-            Intent intent = new Intent(ViewBookActivity.this, MyAccountActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.my_account) {
+//            Intent intent = new Intent(ViewBookActivity.this, MyAccountActivity.class);
+//            startActivity(intent);
+//        }
 
         else if (id == R.id.log_out) {
             Intent intent = new Intent(ViewBookActivity.this, LoginActivity.class);

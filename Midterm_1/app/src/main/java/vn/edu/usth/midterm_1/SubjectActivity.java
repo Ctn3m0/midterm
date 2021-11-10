@@ -273,10 +273,10 @@ public class SubjectActivity extends AppCompatActivity implements NavigationView
 //            Intent intent = new Intent(SubjectActivity.this, FavoriteActivity.class);
 //            startActivity(intent);
 //        }
-        else if (id == R.id.my_account) {
-            Intent intent = new Intent(SubjectActivity.this, MyAccountActivity.class);
-            startActivity(intent);
-        }
+//        else if (id == R.id.my_account) {
+//            Intent intent = new Intent(SubjectActivity.this, MyAccountActivity.class);
+//            startActivity(intent);
+//        }
 
         else if (id == R.id.log_out) {
             Intent intent = new Intent(SubjectActivity.this, LoginActivity.class);

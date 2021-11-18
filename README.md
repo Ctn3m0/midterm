@@ -11,8 +11,9 @@ Realizing the fact that more and more people switch from physical books to E-boo
 | Nguyen Ngoc Anh| BI10-010 |[ngocanhnckh](https://github.com/ngocanhnckh)|20%|Project Manager & UI Design|
 | Tran Ngoc Hieu Nam| BI10-124 |[aidenpearce001](https://github.com/aidenpearce001)|20%|API & Models Developer|
 | Vo Chi Dat| BI9-066 |[chpiano2000](https://github.com/chpiano2000)|20%|Authentication & Firebase Implementation|
-| Duong Dang Hung| BI10-073 |[duongdanghung20](https://github.com/duongdanghung20)|20%|Controller & View Developer|
 | Ta Quang Hieu| BI10-065 |[ctn3m0](https://github.com/ctn3m0)|20%|Controller & View Developer|
+| Duong Dang Hung| BI10-073 |[duongdanghung20](https://github.com/duongdanghung20)|20%|Controller & View Developer|
+
 
 
 ## **2. Methods**
